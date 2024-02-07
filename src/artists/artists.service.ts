@@ -2,15 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { CreateArtistDto } from './dto/create-artist.dto';
 import { ArtistsRepository } from './repository/artists.repository';
 import { Artist } from './entities/artist.entity';
-import { Work } from './entities/works.entity';
 
 @Injectable()
 export class ArtistsService {
   constructor(private artistsRepository: ArtistsRepository) {}
-
-  getAllWorks(): Promise<Work[]> {
-    return this.artistsRepository.getAllWorks();
-  }
 
   getAllArtist(): Promise<Artist[]> {
     return this.artistsRepository.getAllArtist();
@@ -36,21 +31,8 @@ export class ArtistsService {
     );
   }
 
-  uploadArtistWorkImage(
-    id: string,
-    fileName: string,
-    file: Buffer,
-  ): Promise<void> {
-    return this.artistsRepository.uploadArtistWorkImage(id, fileName, file);
-  }
-
-  updateArtist(
-    id: string,
-    artistName: string,
-    biography: string,
-    work: Work[],
-  ) {
-    return this.artistsRepository.updateArtist(id, artistName, biography, work);
+  updateArtist(id: string, artistName: string, biography: string) {
+    return this.artistsRepository.updateArtist(id, artistName, biography);
   }
 
   deleteArtist(id: string): Promise<void> {

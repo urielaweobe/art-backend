@@ -3,11 +3,13 @@ import { ArtistsModule } from './artists/artists.module';
 import { ExhibitionModule } from './exhibition/exhibition.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { WorkModule } from './work/work.module';
 
 @Module({
   imports: [
     ArtistsModule,
     ExhibitionModule,
+    WorkModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',

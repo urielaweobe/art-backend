@@ -15,7 +15,6 @@ import {
 import { ArtistsService } from './artists.service';
 import { CreateArtistDto } from './dto/create-artist.dto';
 import { Artist } from './entities/artist.entity';
-import { Work } from './entities/works.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('artists')
@@ -68,41 +67,13 @@ export class ArtistsController {
     @Param('id') id: string,
     @Body('artistName') artistName: string,
     @Body('biography') biography: string,
-    @Body('work') work: Work[],
   ): Promise<Artist> {
-    return this.artistsService.updateArtist(id, artistName, biography, work);
+    return this.artistsService.updateArtist(id, artistName, biography);
   }
 
   // Delete an artist
   @Delete('/:id/delete')
   deleteArtist(@Param('id') id: string): Promise<void> {
     return this.artistsService.deleteArtist(id);
-  }
-
-  // This get is for getting available works
-  // @Get()
-  // getAllWorks(): Promise<Work[]> {
-  //   return this.artistsService.getAllWorks();
-  // }
-
-  @Post('/:id/upload-work-image')
-  @UseInterceptors(FileInterceptor('file'))
-  async uploadArtistWorkImage(
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          // new MaxFileSizeValidator({ maxSize: 1000 }),
-          // new FileTypeValidator({ fileType: 'image/jpeg' }),
-        ],
-      }),
-    )
-    file: Express.Multer.File,
-    @Param('id') id: string,
-  ): Promise<void> {
-    await this.artistsService.uploadArtistWorkImage(
-      id,
-      file.originalname,
-      file.buffer,
-    );
   }
 }

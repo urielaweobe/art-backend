@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Work } from './works.entity';
+import { Work } from '../../work/entity/works.entity';
 
 @Entity()
 export class Artist {
@@ -16,5 +16,5 @@ export class Artist {
   profilePicture: string;
 
   @Column('json')
-  work: Work[];
+  works: Work[];
 }
