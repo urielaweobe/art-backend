@@ -18,8 +18,6 @@ export class CreateWorkDto {
   size: string;
 
   @IsNotEmpty()
-  // artistWorkImage?: string;
-  @IsNotEmpty()
   description: string;
 
   @IsNotEmpty()
